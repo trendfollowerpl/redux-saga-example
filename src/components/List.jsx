@@ -1,14 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteArticle } from '../actions'
 
 const mapStateToProps = state => ({ articles: state.articles });
-
+const mapDispatchToProps = (dispatch) => ({
+    deleteArticle: payload => dispatch(deleteArticle(payload))
+});
 class ConnectedList extends React.Component {
     constructor() {
         super();
     }
+
     onclick = (event) => {
-        console.log(event.target)
+        this.props.deleteArticle({
+            id: event.target.value
+        })
     }
 
     render() {
@@ -22,6 +28,7 @@ class ConnectedList extends React.Component {
                             <button type='button'
                                 className='btn btn-danger'
                                 onClick={this.onclick}
+                                value={el.id}
                             >Delete</button>
                         </li>
                     ))
@@ -31,7 +38,7 @@ class ConnectedList extends React.Component {
     }
 }
 
-const List = connect(mapStateToProps)(ConnectedList);
+const List = connect(mapStateToProps, mapDispatchToProps)(ConnectedList);
 export {
     List
 }
