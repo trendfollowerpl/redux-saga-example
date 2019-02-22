@@ -5,4 +5,6 @@ const addArticle = (payload) => ({
     payload
 })
 
-export default addArticle;
+export {
+    addArticle
+};
