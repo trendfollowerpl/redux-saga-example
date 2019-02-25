@@ -1,6 +1,7 @@
 import {
     ADD_ARTICLE,
-    DELETE_ARTICLE
+    DELETE_ARTICLE,
+    DATA_REQUESTED
 } from '../constants/actionTypes'
 
 const addArticle = (payload) => ({
@@ -14,10 +15,7 @@ const deleteArticle = (payload) => ({
 })
 
 const getData = () =>
-    dispatch =>
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.json())
-            .then(json => dispatch({ type: 'DATA_LOADED', payload: json }))
+    ({ type: DATA_REQUESTED })
 
 export {
     addArticle,
